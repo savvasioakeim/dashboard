@@ -34,15 +34,7 @@ body {
 
 }
 
-.passwordLabel {
 
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-}
 
 input[type="text"],
 input[type="password"] {
@@ -51,16 +43,14 @@ input[type="password"] {
     padding: 0.5rem 1rem;
     border-radius: 5px;
 
-    font-size: 1.2rem;
+
 }
 
 .passwordContainer {
     position: relative;
 }
 
-.forgotPasswordSpan {
-    color: rebeccapurple;
-}
+
 
 .forgotPasswordSpan:hover {
     cursor: pointer;
