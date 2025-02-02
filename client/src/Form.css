@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
-    background-color: wheat;
+    background-color: rgb(238, 235, 235);
     max-width: max-content;
-    padding: 1em 4em;
     display: flex;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
     font-size: 1.2rem;
+
 
 }
 
@@ -28,7 +35,7 @@
 }
 
 .passwordLabel {
-    font-size: 1em;
+
 
     display: flex;
     flex-direction: row;
@@ -43,8 +50,7 @@ input[type="password"] {
     height: 2.2em;
     padding: 0.5rem 1rem;
     border-radius: 5px;
-    border: none;
-    outline: 1px solid rgb(71, 71, 71);
+
     font-size: 1.2rem;
 }
 
