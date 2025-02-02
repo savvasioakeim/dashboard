@@ -48,7 +48,7 @@ export default function Form() {
                             <span className='text-base'>Password</span>
                         </div>
                         <div>
-                            <span className='text-purple-700 text-base' >Forgot your password?</span>
+                            <span className='text-purple-700 text-base hover:cursor-pointer' >Forgot your password?</span>
                         </div>
                     </div>
 
