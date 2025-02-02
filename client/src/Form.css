@@ -48,6 +48,7 @@ input[type="password"] {
 
 .passwordContainer {
     position: relative;
+    display: inline-block;
 }
 
 
