@@ -1,6 +1,4 @@
-@import "tailwindcss";
-
-body {
+.form-body {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -36,8 +34,8 @@ body {
 
 
 
-input[type="text"],
-input[type="password"] {
+.form-input-text[type="text"],
+.form-input-password[type="password"] {
     width: 23em;
     height: 2.2em;
     padding: 0.5rem 1rem;

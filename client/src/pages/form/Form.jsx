@@ -24,6 +24,21 @@ export default function Form() {
         passwordInputRef.current.focus();
     }
 
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+
+    }
+    useEffect(() => {
+        document.body.classList.add('form-body')
+
+        return () => {
+            document.body.classList.remove('form-body');
+        };
+    }, [])
+
+
+
     useEffect(() => {
         document.body.classList.add('bg-gradient-to-r', 'from-stone-800', 'via-zinc-500', 'to-slate-700', 'min-h-screen');
         return () => {
@@ -41,7 +56,7 @@ export default function Form() {
                         value={email}
                         onChange={handleEmailChanges}
                         type="text"
-                        className='text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300'
+                        className='form-input-text text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300'
                     />
                 </div>
 
@@ -59,7 +74,7 @@ export default function Form() {
                             onChange={handlePasswordChange}
                             ref={passwordInputRef}
                             type={showPassword ? 'text' : 'password'}
-                            className='text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300'
+                            className='form-input-password text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300'
                         />
                         {showPassword ? (
                             <FaRegEyeSlash
@@ -81,7 +96,7 @@ export default function Form() {
                 </div>
 
                 <div className='text-center mt-2'>
-                    <button className='w-full text-xs sm:text-base flex items-center justify-center bg-blue-600 text-white rounded hover:border-transparent hover:bg-blue-700 w-110 text-1xl h-10 hover:cursor-pointer active:ring-3 active:ring-blue-300'>
+                    <button onClick={handleSubmit} className='w-full text-xs sm:text-base flex items-center justify-center bg-blue-600 text-white rounded hover:border-transparent hover:bg-blue-700 w-110 text-1xl h-10 hover:cursor-pointer active:ring-3 active:ring-blue-300'>
                         Sign in
                     </button>
                 </div>
