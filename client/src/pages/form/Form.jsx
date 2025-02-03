@@ -74,7 +74,7 @@ export default function Form() {
                             onChange={handlePasswordChange}
                             ref={passwordInputRef}
                             type={showPassword ? 'text' : 'password'}
-                            className='form-input-password text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300'
+                            className='form-input-text form-input-password text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300'
                         />
                         {showPassword ? (
                             <FaRegEyeSlash
