@@ -8,9 +8,13 @@ export default function SignInForm({ toggleForm }) {
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("")
 
     function handleEmailChanges(e) {
         setEmail(e.target.value);
+    }
+    function handleNameChanges(e) {
+        setName(e.target.value);
     }
 
     function handlePasswordChange(e) {
@@ -68,6 +72,19 @@ export default function SignInForm({ toggleForm }) {
                 <p className="mb-5 text-md sm:text-2xl font-bold ">
                     Create new account
                 </p>
+                <div className="emailLabel">
+                    <span className="emailSpan">
+                        <label className="text-xs sm:text-base" htmlFor="name">
+                            Name
+                        </label>
+                    </span>
+                    <input
+                        value={name}
+                        onChange={handleNameChanges}
+                        type="text"
+                        className="form-input-text text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300"
+                    />
+                </div>
                 <div className="emailLabel">
                     <span className="emailSpan">
                         <label className="text-xs sm:text-base" htmlFor="email">
