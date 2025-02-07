@@ -3,11 +3,17 @@ import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import CheckboxWithCheckmark from "./Checkbox";
+import { useNavigate } from "react-router-dom";
 
 export default function SignInForm({ toggleForm }) {
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+
+
+
+
+    const navigate = useNavigate();
 
     function handleEmailChanges(e) {
         setEmail(e.target.value);
@@ -34,6 +40,32 @@ export default function SignInForm({ toggleForm }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
+
+        if (!email || !password) {
+            alert("All fields are required");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:3000/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                navigate("/dashboard");
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            alert("An error occurred. Please try again.");
+        }
     }
     useEffect(() => {
         document.body.classList.add("form-body");
@@ -63,7 +95,7 @@ export default function SignInForm({ toggleForm }) {
     }, []);
 
     return (
-        <form className="container rounded flex flex-col pb-2 pl-1 pr-1">
+        <form onSubmit={handleSubmit} className="container rounded flex flex-col pb-2 pl-1 pr-1">
             <div className="header pt-20 pb-5 pl-5 pr-5 sm:pl-10 sm:pr-10">
                 <p className="mb-5 text-md sm:text-2xl font-bold ">
                     Sign in to your account
