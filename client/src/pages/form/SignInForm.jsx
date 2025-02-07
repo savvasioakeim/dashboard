@@ -9,11 +9,18 @@ export default function SignInForm({ toggleForm }) {
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-
+    const [rememberMe, setRememberMe] = useState(false);
 
 
 
     const navigate = useNavigate();
+
+
+
+
+    function handleForgotPassword() {
+        alert("well too bad... make a new account")
+    }
 
     function handleEmailChanges(e) {
         setEmail(e.target.value);
@@ -37,6 +44,9 @@ export default function SignInForm({ toggleForm }) {
             }, 0);
         }
     }
+    function handleRememberMeChange(checked) {
+        setRememberMe(checked); // Update rememberMe state when checkbox is toggled
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -52,7 +62,7 @@ export default function SignInForm({ toggleForm }) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ email, password, rememberMe }),
             });
 
             const data = await response.json();
@@ -120,7 +130,7 @@ export default function SignInForm({ toggleForm }) {
                             <span className="text-xs sm:text-base">Password</span>
                         </div>
                         <div>
-                            <span className="text-purple-700 text-xs sm:text-base hover:cursor-pointer">
+                            <span onClick={handleForgotPassword} className="text-purple-700 text-xs sm:text-base hover:cursor-pointer">
                                 Forgot your password?
                             </span>
                         </div>
@@ -155,7 +165,10 @@ export default function SignInForm({ toggleForm }) {
                 </div>
 
                 <div className="flex items-center mt-1 mb-3">
-                    <CheckboxWithCheckmark />
+                    <CheckboxWithCheckmark
+                        checked={rememberMe}
+                        onChange={handleRememberMeChange}
+                    />
                     <span className="ml-2 text-xs sm:text-base">
                         Remember me on this device
                     </span>

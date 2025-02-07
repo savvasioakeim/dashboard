@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-function CheckboxWithCheckmark() {
-    const [checked, setChecked] = useState(false);
-    const [hasFocus, setHasFocus] = useState(false); // Track focus state
+function CheckboxWithCheckmark({ checked, onChange }) {
+
+    const [hasFocus, setHasFocus] = useState(false);
 
     const handleChange = () => {
-        setChecked(!checked);
+        onChange(!checked);
     };
 
     const handleFocus = () => {
