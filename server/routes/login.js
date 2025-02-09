@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
                 req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
             } else {
 
-                req.session.cookie.expires = false;
+                req.session.cookie.maxAge = null;
             }
             return res.status(200).json({ message: "Login successful", user });
         } else {

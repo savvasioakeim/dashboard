@@ -7,13 +7,14 @@ const sessionConfig = session({
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI,  // MongoDB connection URI from your .env file
-        collectionName: 'sessions',  // Optional: specify the collection name for sessions
+        mongoUrl: process.env.MONGODB_URI,
+        collectionName: 'sessions',
     }),
     cookie: {
-        secure: false,  // Set to true if using HTTPS
-        httpOnly: true, // Prevents client-side access to cookies
-        sameSite: 'lax'
+        secure: false,
+        httpOnly: true,
+        sameSite: 'lax',
+        maxAge: null,
     }
 });
 

@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 const router = express.Router();
 const session = require('express-session');
-router.use(session({ secret: 'aSecret', resave: false, saveUninitialized: false }));
+router.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 
 
 router.post('/', async (req, res) => {
