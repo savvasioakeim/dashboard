@@ -63,6 +63,7 @@ export default function SignInForm({ toggleForm }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ email, password, rememberMe }),
+                credentials: "include",
             });
 
             const data = await response.json();

@@ -58,6 +58,7 @@ export default function SignUnForm({ toggleForm }) {
                 email: email,
                 password: password,
             }),
+            credentials: "include",
         });
 
         const data = await response.json();

@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/dashboard.png'
 import './App.css'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Dashboard from './pages/dashboard/Dashboard'
 import AuthForm from './pages/form/AuthForm'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +22,7 @@ function App() {
 
           <Route path='/login' element={<AuthForm />} />
           <Route path='/dashboard' element={<Dashboard />} />
+
         </Routes>
 
       </Router>

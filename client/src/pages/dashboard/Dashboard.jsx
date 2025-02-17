@@ -1,10 +1,20 @@
 import { React, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+
+import Sidebar from './Sidebar/Sidebar'
+
 const Dashboard = () => {
 
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+
+
+  function toggleSidebar() {
+    setIsSidebarOpen((prev) => !prev);
+  }
 
   useEffect(() => {
     document.body.classList.add('bg-gradient-to-r', 'from-stone-800', 'via-zinc-500', 'to-slate-700', 'min-h-screen');
@@ -12,6 +22,7 @@ const Dashboard = () => {
       document.body.classList.remove('bg-gradient-to-r', 'from-stone-800', 'via-zinc-500', 'to-slate-700', 'min-h-screen');
     };
   }, []);
+
 
   const navigate = useNavigate();
 
@@ -73,10 +84,11 @@ const Dashboard = () => {
 
 
 
-    <div>
-      <h1>Welcome to the Dashboard {user.name} !</h1>
-      <p>This is your dashboard page.</p>
-      <button onClick={handleLogout}>Logout</button>
+    <div >
+
+      <Sidebar name={user.name} logout={handleLogout} isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+
+
     </div>
   );
 };
