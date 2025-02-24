@@ -5,6 +5,7 @@ const cors = require('cors');
 const routes = require('./routes');
 const connectDB = require('./config/db');
 const sessionConfig = require('./config/sessionConfig');
+const userRoutes = require('./routes/userRoutes');
 
 
 const app = express();
@@ -21,6 +22,10 @@ app.use(cors({
 app.use(sessionConfig);
 
 app.use('/api', routes);
+app.use('/api/users', userRoutes);
+
+
+app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
 
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));

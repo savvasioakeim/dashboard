@@ -1,38 +1,51 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom"; // <-- Import Link
-import reactLogo from "../../../assets/react.svg";
+
 import { FaHome, FaUserShield, FaUserPlus, FaUserCog } from "react-icons/fa";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { TbClipboardList } from "react-icons/tb";
 import { BsBoxSeam } from "react-icons/bs";
 import { RiFunctionAddFill, RiLogoutBoxRFill } from "react-icons/ri";
 import { LuArrowRightToLine } from "react-icons/lu";
+import { FaUserCircle } from "react-icons/fa";
 
 
 
-export default function Sidebar({ name, logout, isOpen, toggleSidebar }) {
+
+
+export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
     const location = useLocation();
     return (
         <div
-            className={`bg-slate-800 text-white flex flex-col items-start max-w-fit text-4xs h-screen rounded relative transition-all ${isOpen ? "w-fit p-7" : "w-fit p-3"
+            className={`bg-slate-800 text-white flex flex-col items-start min-w-fit text-4xs h-screen rounded relative transition-all  ${isOpen ? "md:w-fit md:p-7 w-fit p-4" : "w-fit p-2"
                 }`}
         >
 
             <div className="flex p-2 text-white items-center mx-auto">
-                <div className="flex flex-col pt-9 sm:pt-16 items-center gap-1">
-                    <img
-                        className={` ${!isOpen
+                <div className="flex flex-col pt-9 sm:pt-16 items-center gap-1 ">
+                    {user.avatar ? (
+                        <img
+                            src={`http://localhost:3000${user.avatar}`}
+                            alt="User Avatar"
+                            className={`rounded-full border bg-white text-black   ${!isOpen
+                                ? "w-7 h-7 sm:w-11 sm:h-11"
+                                : "w-15 h-15 sm:w-30 sm:h-30"
+                                }`}
+                        />
+                    ) : (
+                        <FaUserCircle className={`rounded-full border bg-white text-black   ${!isOpen
                             ? "w-7 h-7 sm:w-11 sm:h-11"
-                            : "w-15 h-15 sm:w-18 sm:h-18"
-                            }`}
-                        src={reactLogo}
-                        alt="React Logo"
-                    />
+                            : "w-15 h-15 sm:w-26 sm:h-26"
+                            }`} />
+                    )}
+
+
+
                     <span className={`${!isOpen ? "text-base sm:text-sm" : "text-2xl sm:text-4xl"}`}>
-                        {name.charAt(0).toUpperCase() + name.slice(1)}
+                        {user.name.charAt(0).toUpperCase() + user.name.slice(1)}
                     </span>
-                    <span className={`text-xs text-green-200 ${!isOpen && "hidden"}`}>
-                        Admin
+                    <span className={`text-xs md:text-xl text-sky-300 ${!isOpen && "hidden"}`}>
+                        {user.role}
                     </span>
                 </div>
             </div>
@@ -78,20 +91,27 @@ export default function Sidebar({ name, logout, isOpen, toggleSidebar }) {
                     <h1 className="text-sm text-neutral-300">Account</h1>
                     <div className="flex flex-col gap-2">
                         <Link to="/dashboard/users" className={`flex items-center gap-2 hover:text-purple-400 ${location.pathname === "/dashboard/users" && "text-purple-400 "}  `}>
-                            <FaUserShield />
-                            <span className={`${!isOpen && "hidden"}`}>Manage Users</span>
+                            <button disabled={user.role != 'admin'} className={`flex items-center gap-2 ${((user.role !== 'admin') || (user.name === 'admin')) && 'text-gray-600 cursor-not-allowed'} `}>
+                                <FaUserShield />
+                                <span className={`${!isOpen && "hidden"}`}>Manage Users</span>
+                            </button>
                         </Link>
                         <Link to="/dashboard/users/create" className={`flex items-center gap-2 hover:text-purple-400 ${location.pathname === "/dashboard/users/create" && "text-purple-400 "}`}>
-                            <FaUserPlus />
-                            <span className={`${!isOpen && "hidden"}`}>Create User</span>
+                            <button disabled={user.role != 'admin'} className={`flex items-center gap-2 ${((user.role !== 'admin') || (user.name === 'admin')) && 'text-gray-600 cursor-not-allowed'} `}>
+                                <FaUserPlus />
+                                <span className={`${!isOpen && "hidden"}`}>Create User</span>
+                            </button>
                         </Link>
                         <Link to="/dashboard/account-settings" className={`flex items-center gap-2 hover:text-purple-400 ${location.pathname === "/dashboard/account-settings" && "text-purple-400 "}`}>
-                            <FaUserCog />
-                            <span className={`${!isOpen && "hidden"}`}>Account Settings</span>
+                            <button className="flex items-center gap-2 cursor-pointer">
+                                <FaUserCog />
+                                <span className={`${!isOpen && "hidden"}`}>Account Settings</span>
+                            </button>
+
                         </Link>
                     </div>
                 </div>
-            </nav>
+            </nav >
 
             <div
                 className={`flex gap-2 hover:text-purple-400 cursor-pointer w-full mt-5 sm:text-2xl mt-auto items-center ${!isOpen && "justify-center"
@@ -109,6 +129,6 @@ export default function Sidebar({ name, logout, isOpen, toggleSidebar }) {
                     <LuArrowRightToLine className={`transition-transform ${isOpen ? "rotate-0" : "rotate-180"}`} />
                 </button>
             </div>
-        </div>
+        </div >
     );
 }

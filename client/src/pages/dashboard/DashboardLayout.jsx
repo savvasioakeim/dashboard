@@ -78,14 +78,12 @@ export default function DashboardLayout() {
     };
 
     return (
-        <div className="flex">
-            {/* Sidebar is always visible */}
-            <Sidebar name={user.name} logout={handleLogout} isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-
-            {/* Dynamic content changes inside Outlet */}
-            <div className="flex-1 p-5">
-                <Outlet />
+        <div className="flex ">
+            <Sidebar user={user} logout={handleLogout} isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+            <div className={`flex-1 pl-2  transition-all duration-300  ${isSidebarOpen ? "ml-5" : "ml-2"}`}>
+                <Outlet context={{ user, authenticated }} />
             </div>
         </div>
+
     );
 }
