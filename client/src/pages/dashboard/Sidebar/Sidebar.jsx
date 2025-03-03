@@ -17,7 +17,7 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
     const location = useLocation();
     return (
         <div
-            className={`bg-slate-800 text-white flex flex-col items-start min-w-fit text-4xs h-screen rounded relative transition-all  ${isOpen ? "md:w-fit md:p-7 w-fit p-4" : "w-fit p-2"
+            className={`fixed top-0 left-0 z-50 sm:text-white flex flex-col  min-w-fit text-4xs  rounded relative  sm:bg-slate-800  ${isOpen ? "text-white md:w-fit md:p-7 w-45 p-4 h-screen items-start bg-slate-800" : "w-fit p-3 h-10  md:h-screen bg-inherit text-slate-800 "
                 }`}
         >
 
@@ -27,21 +27,21 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
                         <img
                             src={`http://localhost:3000${user.avatar}`}
                             alt="User Avatar"
-                            className={`rounded-full border bg-white text-black   ${!isOpen
-                                ? "w-7 h-7 sm:w-11 sm:h-11"
-                                : "w-15 h-15 sm:w-30 sm:h-30"
+                            className={`rounded-full border bg-white text-black object-cover  ${!isOpen
+                                ? "w-7 h-7 sm:w-11 sm:h-11 hidden"
+                                : "w-15 h-15 sm:w-30 sm:h-30 "
                                 }`}
                         />
                     ) : (
                         <FaUserCircle className={`rounded-full border bg-white text-black   ${!isOpen
-                            ? "w-7 h-7 sm:w-11 sm:h-11"
+                            ? "w-7 h-7 sm:w-11 sm:h-11 sm:block hidden"
                             : "w-15 h-15 sm:w-26 sm:h-26"
                             }`} />
                     )}
 
 
 
-                    <span className={`${!isOpen ? "text-base sm:text-sm" : "text-2xl sm:text-4xl"}`}>
+                    <span className={`${!isOpen ? "text-base sm:text-sm sm:block hidden" : "text-2xl sm:text-4xl"}`}>
                         {user.name.charAt(0).toUpperCase() + user.name.slice(1)}
                     </span>
                     <span className={`text-xs md:text-xl text-sky-300 ${!isOpen && "hidden"}`}>
@@ -51,7 +51,7 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
             </div>
 
 
-            <nav className={`mt-9 flex flex-col gap-4 sm:text-2xl ${!isOpen && "items-center"}`}>
+            <nav className={`mt-9 flex flex-col gap-4 sm:text-2xl ${!isOpen && "items-center sm:block hidden"}`}>
 
                 <div className={`${!isOpen && "flex flex-col items-center"}`}>
                     <h1 className="text-xs text-neutral-300">Main</h1>
@@ -114,7 +114,7 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
             </nav >
 
             <div
-                className={`flex gap-2 hover:text-purple-400 cursor-pointer w-full mt-5 sm:text-2xl mt-auto items-center ${!isOpen && "justify-center"
+                className={`flex gap-2 hover:text-purple-400 cursor-pointer w-full mt-5 sm:text-2xl mt-auto items-center  ${!isOpen && "justify-center sm:flex hidden "
                     }`}
             >
                 <RiLogoutBoxRFill />
@@ -123,10 +123,10 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
                 </button>
             </div>
 
-            <div className="absolute top-3 left-0 w-full px-4 flex items-center justify-between sm:text-2xl">
+            <div className={`absolute top-3 left-0 w-full px-4 flex items-center  sm:text-2xl ${!isOpen ? "justify-center  " : "justify-between"}`}>
                 <span className={`${!isOpen && "hidden"}`}>Eshop.com</span>
-                <button onClick={toggleSidebar} className="cursor-pointer">
-                    <LuArrowRightToLine className={`transition-transform ${isOpen ? "rotate-0" : "rotate-180"}`} />
+                <button onClick={toggleSidebar} className="cursor-pointer ">
+                    <LuArrowRightToLine className={`transition-transform ${isOpen ? "rotate-0 " : "rotate-180 "}`} />
                 </button>
             </div>
         </div >

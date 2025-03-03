@@ -39,3 +39,14 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+
+
+// ****************update user to admin mongoshell****************
+// db.users.updateOne({_id:ObjectId('67a56f18987071e463ef690d')},
+// ... {
+// ... $set:{
+// ... role:"admin"
+// ... }
+// ... }
+// ... )

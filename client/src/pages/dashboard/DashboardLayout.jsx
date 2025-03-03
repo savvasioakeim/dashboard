@@ -7,7 +7,7 @@ export default function DashboardLayout() {
     const [loading, setLoading] = useState(true);
     const [authenticated, setAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 
 
@@ -78,9 +78,15 @@ export default function DashboardLayout() {
     };
 
     return (
-        <div className="flex ">
-            <Sidebar user={user} logout={handleLogout} isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-            <div className={`flex-1 pl-2  transition-all duration-300  ${isSidebarOpen ? "ml-5" : "ml-2"}`}>
+        <div className="flex relative ">
+
+            <div className={`absolute sm:static`}>
+                <Sidebar user={user} logout={handleLogout} isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+            </div>
+
+
+
+            <div className={`flex-1   transition-all duration-300  ${isSidebarOpen ? "ml-0" : "ml-0"}`}>
                 <Outlet context={{ user, authenticated }} />
             </div>
         </div>

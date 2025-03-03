@@ -22,6 +22,7 @@ export default function AccountSettings() {
 
 
 
+
     function handleEmailChanges(e) {
         setEmail(e.target.value);
     }
@@ -160,7 +161,9 @@ export default function AccountSettings() {
         const file = event.target.files[0];
         if (file) {
             setSelectedFile(file);
+
         }
+
     };
 
 
@@ -199,39 +202,95 @@ export default function AccountSettings() {
         return `${visiblePart}${hiddenPart}@${domain}`;
     };
 
+
+
+    const handleRemoveAvatar = async () => {
+
+        try {
+            const response = await axios.delete(
+                `http://localhost:3000/api/users/remove-avatar/${user._id}`,
+                { withCredentials: true }
+            );
+
+            if (response.data.success) {
+                setUser((prevUser) => ({ ...prevUser, avatar: null }));
+                setSelectedFile(null)
+
+                const fileInput = document.getElementById("file-upload");
+                if (fileInput) {
+                    fileInput.value = "";
+                }
+                alert("Avatar removed successfully.");
+            } else {
+                alert("Failed to remove avatar.");
+            }
+
+        } catch (error) {
+            console.error("Error removing avatar:", error);
+            alert("An error occurred. Please try again.");
+        }
+
+
+
+    };
+
     const formattedEmail = obfuscateEmail(user.email);
     return (
         <>
             <div className="w-full h-screen bg-slate-200  rounded flex  justify-center  items-center pl-4 pr-4 ">
                 <div className="border w-fit md:w-2xl bg-white   flex flex-col rounded p-7 md:p-14 ">
                     <div className="flex flex-col gap-2 ">
-                        <div className="flex flex-col items-center gap-2   ">
+                        <div className="flex  items-center gap-2 justify-around  ">
+                            <div className="flex flex-col">
 
-                            {user.avatar ? (
-                                <img
-                                    src={`http://localhost:3000${user.avatar}`}
-                                    alt="User Avatar"
-                                    className="text-5xl w-20 h-20 md:w-40 md:h-40 rounded-full border border-black"
-                                />
-                            ) : (
-                                <FaUserCircle className="rounded-full border bg-white text-black" />
-                            )}
 
-                            <div className="flex w-full flex-col items-center justify-around">
-                                <div className="relative ">
-                                    <input
-                                        type="file"
-                                        id="file-upload"
-                                        onChange={handleFileChange}
-                                        className="hidden inset-0 opacity-0 cursor-pointer "
+
+                                {user.avatar ? (
+                                    <img
+                                        src={`http://localhost:3000${user.avatar}`}
+                                        alt="User Avatar"
+                                        className="text-5xl w-20 h-20 md:w-40 md:h-40 rounded-full border border-black object-cover"
                                     />
-                                    <label
-                                        htmlFor="file-upload"
-                                        className="block text-xs md:text-base  text-center bg-blue-500 cursor-pointer text-white p-2 rounded pl-4 pr-4  md:pl-5    md:pr-5  hover:bg-blue-600 mt-2  "
-                                    >
-                                        Upload File
-                                    </label>
+                                ) : (
+                                    <FaUserCircle className="rounded-full border bg-white text-black w-20 h-20 md:w-40 md:h-40" />
+                                )}
+
+
+                                <div className="flex w-full flex-col items-center justify-around">
+                                    <div className="relative ">
+                                        <input
+                                            type="file"
+                                            id="file-upload"
+                                            onChange={handleFileChange}
+                                            className="hidden inset-0 opacity-0 cursor-pointer "
+                                        />
+                                        <label
+                                            htmlFor="file-upload"
+                                            className="block text-xs md:text-base  text-center bg-blue-500 cursor-pointer text-white p-2 rounded pl-4 pr-4  md:pl-5    md:pr-5  hover:bg-blue-600 mt-2  "
+                                        >
+                                            Upload File
+                                        </label>
+                                    </div>
                                 </div>
+
+                            </div>
+
+                            <div className="flex flex-col items-center">
+                                {selectedFile ? (
+                                    <img
+                                        src={URL.createObjectURL(selectedFile)}
+                                        alt="Preview Avatar"
+                                        className="text-5xl w-20 h-20 md:w-40 md:h-40 rounded-full border border-black object-cover"
+                                    />
+                                ) : user.avatar ? (
+                                    <img
+                                        src={`http://localhost:3000${user.avatar}`}
+                                        alt="User Avatar"
+                                        className="text-5xl w-20 h-20 md:w-40 md:h-40 rounded-full border border-black object-cover"
+                                    />
+                                ) : (
+                                    <FaUserCircle className="rounded-full border bg-white text-black w-20 h-20 md:w-40 md:h-40" />
+                                )}
                                 <div>
                                     <button
                                         disabled={!selectedFile}
@@ -243,7 +302,26 @@ export default function AccountSettings() {
                                         Change Avatar
                                     </button>
                                 </div>
+
                             </div>
+                            <div className="flex flex-col items-center">
+
+                                <FaUserCircle className="rounded-full border bg-white text-black w-20 h-20 md:w-40 md:h-40" />
+
+                                <div>
+                                    <button
+                                        disabled={!user.avatar}
+                                        type="button"
+                                        onClick={handleRemoveAvatar}
+                                        className={`outline rounded p-2 mt-2 text-xs md:text-base ${user.avatar ? "bg-red-600 hover:bg-red-700 cursor-pointer" : "bg-gray-400 cursor-not-allowed"
+                                            } text-white`}
+                                    >
+                                        Remove Avatar
+                                    </button>
+                                </div>
+
+                            </div>
+
 
 
 
