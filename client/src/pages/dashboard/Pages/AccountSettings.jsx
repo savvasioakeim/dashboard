@@ -237,8 +237,8 @@ export default function AccountSettings() {
     const formattedEmail = obfuscateEmail(user.email);
     return (
         <>
-            <div className="w-full h-screen bg-slate-200  rounded flex  justify-center  items-center pl-4 pr-4 ">
-                <div className="border w-fit md:w-2xl bg-white   flex flex-col rounded p-7 md:p-14 ">
+            <div className="w-full h-screen bg-slate-200   flex  justify-center  items-center  ">
+                <div className="border w-fit md:w-2xl bg-white   flex flex-col rounded p-3 py-5 md:p-14 ">
                     <div className="flex flex-col gap-2 ">
                         <div className="flex  items-center gap-2 justify-around  ">
                             <div className="flex flex-col">
@@ -328,7 +328,7 @@ export default function AccountSettings() {
                         </div>
                         <hr className="mt-4 mb-4 border-gray-400" />
 
-                        <div className="flex  gap-2 items-end justify-around text-xs md:text-base ">
+                        <div className="flex  gap-2 items-end justify-between sm:justify-around text-xs md:text-base ">
                             <div className="flex flex-col gap-2">
                                 <label htmlFor="changeName">Change Name <span className="text-gray-400 ">{`(${user.name.charAt(0).toUpperCase() + user.name.slice(1)})`}</span> </label>
                                 <input value={name} onChange={handleNameChanges} type="text" className="form-input-text text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300 " name="changeName" />
@@ -337,7 +337,7 @@ export default function AccountSettings() {
                         </div>
                         <hr className="mt-4 mb-4 border-gray-400" />
 
-                        <div className="flex  gap-2 items-end justify-around text-xs md:text-base">
+                        <div className="flex  gap-2 items-end justify-between sm:justify-around text-xs md:text-base">
                             <div className="flex flex-col gap-2">
                                 <label htmlFor="ChangeEmail">Change email <span className="text-gray-400 ">{`(${formattedEmail})`}</span> </label>
                                 <input value={email} onChange={handleEmailChanges} type="text" className="form-input-text text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300 " name="changeEmail" />
@@ -345,7 +345,7 @@ export default function AccountSettings() {
                             <button onClick={handleUpdateEmail} type="button" className="outline rounded bg-slate-700 text-white p-2 hover:bg-slate-900 cursor-pointer ">Save</button>
                         </div>
                         <hr className="mt-4 mb-4 border-gray-400" />
-                        <div className="flex  justify-around items-end  text-xs md:text-base">
+                        <div className="flex  justify-between sm:justify-around items-end  text-xs md:text-base">
                             <div className="flex flex-col gap-2 ">
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="password">Password</label>

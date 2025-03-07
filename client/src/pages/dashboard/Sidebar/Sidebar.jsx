@@ -17,7 +17,7 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
     const location = useLocation();
     return (
         <div
-            className={`fixed top-0 left-0 z-50 sm:text-white flex flex-col  min-w-fit text-4xs  rounded relative  sm:bg-slate-800  ${isOpen ? "text-white md:w-fit md:p-7 w-45 p-4 h-screen items-start bg-slate-800" : "w-fit p-3 h-10  md:h-screen bg-inherit text-slate-800 "
+            className={`fixed top-0 left-0 z-50 sm:text-white flex flex-col  min-w-fit text-4xs  rounded-r-md relative   sm:bg-slate-800  ${isOpen ? "text-white md:w-fit md:p-7 w-45 p-4 h-screen items-start bg-slate-800" : "w-fit p-3 h-10  md:h-screen bg-inherit text-slate-800 "
                 }`}
         >
 
@@ -91,13 +91,13 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
                     <h1 className="text-sm text-neutral-300">Account</h1>
                     <div className="flex flex-col gap-2">
                         <Link to="/dashboard/users" className={`flex items-center gap-2 hover:text-purple-400 ${location.pathname === "/dashboard/users" && "text-purple-400 "}  `}>
-                            <button disabled={user.role != 'admin'} className={`flex items-center gap-2 ${((user.role !== 'admin') || (user.name === 'admin')) && 'text-gray-600 cursor-not-allowed'} `}>
+                            <button disabled={user.role != 'admin'} className={`flex items-center gap-2 ${((user.role !== 'admin') || (user.name === 'admin')) ? 'text-gray-600 cursor-not-allowed' : 'cursor-pointer'} `}>
                                 <FaUserShield />
                                 <span className={`${!isOpen && "hidden"}`}>Manage Users</span>
                             </button>
                         </Link>
                         <Link to="/dashboard/users/create" className={`flex items-center gap-2 hover:text-purple-400 ${location.pathname === "/dashboard/users/create" && "text-purple-400 "}`}>
-                            <button disabled={user.role != 'admin'} className={`flex items-center gap-2 ${((user.role !== 'admin') || (user.name === 'admin')) && 'text-gray-600 cursor-not-allowed'} `}>
+                            <button disabled={user.role != 'admin'} className={`flex items-center gap-2 ${((user.role !== 'admin') || (user.name === 'admin')) ? 'text-gray-600 cursor-not-allowed' : 'cursor-pointer'} `}>
                                 <FaUserPlus />
                                 <span className={`${!isOpen && "hidden"}`}>Create User</span>
                             </button>
@@ -117,7 +117,7 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
                 className={`flex gap-2 hover:text-purple-400 cursor-pointer w-full mt-5 sm:text-2xl mt-auto items-center  ${!isOpen && "justify-center sm:flex hidden "
                     }`}
             >
-                <RiLogoutBoxRFill />
+                <RiLogoutBoxRFill onClick={logout} />
                 <button className={`${!isOpen && "hidden"}`} onClick={logout}>
                     Logout
                 </button>

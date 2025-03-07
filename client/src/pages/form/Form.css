@@ -36,7 +36,8 @@
 
 
 .form-input-text[type="text"],
-.form-input-password[type="password"] {
+.form-input-password[type="password"],
+.form-input-radio {
     width: 23em;
     height: 2.2em;
     padding: 0.5rem 1rem;

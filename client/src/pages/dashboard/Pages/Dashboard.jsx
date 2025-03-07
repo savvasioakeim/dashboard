@@ -8,9 +8,10 @@ const Dashboard = () => {
 
 
 
-    <div className="w-full h-screen bg-slate-800 p-0">
+    <div className='w-full h-screen bg-slate-200'>
 
     </div>
+
   );
 };
 

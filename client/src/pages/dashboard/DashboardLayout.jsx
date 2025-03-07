@@ -80,13 +80,14 @@ export default function DashboardLayout() {
     return (
         <div className="flex relative ">
 
+
             <div className={`absolute sm:static`}>
                 <Sidebar user={user} logout={handleLogout} isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
             </div>
 
 
 
-            <div className={`flex-1   transition-all duration-300  ${isSidebarOpen ? "ml-0" : "ml-0"}`}>
+            <div className={`flex-1   transition-all duration-200    ${isSidebarOpen ? "brightness-80 md:brightness-100 " : "brightness-100"}`}>
                 <Outlet context={{ user, authenticated }} />
             </div>
         </div>

@@ -9,13 +9,15 @@ router.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUnin
 
 router.post('/', async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, confirmPassword, role } = req.body;
+        const userRole = role || "user";
 
-
-        if (!name || !email || !password) {
+        if (!name || !email || !password || !confirmPassword) {
             return res.status(400).json({ message: "All fields are required" });
         }
-
+        if (password !== confirmPassword) {
+            return res.status(400).json({ message: "Passwords Do not Match" });
+        }
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -24,7 +26,7 @@ router.post('/', async (req, res) => {
 
 
         const hash = await bcrypt.hash(password, 12);
-        const user = new User({ name, email, password: hash });
+        const user = new User({ name, email, password: hash, role: userRole });
 
         await user.save();
         req.session.user_id = user._id;

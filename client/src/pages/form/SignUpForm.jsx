@@ -7,8 +7,10 @@ import { useNavigate } from "react-router-dom";
 export default function SignUnForm({ toggleForm }) {
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [email, setEmail] = useState("");
     const [name, setName] = useState("")
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 
     const navigate = useNavigate();
@@ -23,6 +25,9 @@ export default function SignUnForm({ toggleForm }) {
     function handlePasswordChange(e) {
         setPassword(e.target.value);
     }
+    function handleConfirmPasswordChange(e) {
+        setConfirmPassword(e.target.value);
+    }
 
     function toggleEye() {
         const input = document.getElementById("password-input");
@@ -30,6 +35,20 @@ export default function SignUnForm({ toggleForm }) {
         if (input) {
             const cursorPosition = input.selectionStart;
             setShowPassword((prevState) => !prevState);
+
+            setTimeout(() => {
+                input.selectionStart = cursorPosition;
+                input.selectionEnd = cursorPosition;
+                input.focus();
+            }, 0);
+        }
+    }
+    function toggleEye2() {
+        const input = document.getElementById("confirmPassword-input");
+
+        if (input) {
+            const cursorPosition = input.selectionStart;
+            setShowConfirmPassword((prevState) => !prevState);
 
             setTimeout(() => {
                 input.selectionStart = cursorPosition;
@@ -57,6 +76,7 @@ export default function SignUnForm({ toggleForm }) {
                 name: name,
                 email: email,
                 password: password,
+                confirmPassword: confirmPassword,
             }),
             credentials: "include",
         });
@@ -64,10 +84,10 @@ export default function SignUnForm({ toggleForm }) {
         const data = await response.json();
 
         if (response.ok) {
-            alert(data.message); // Success message
+            alert(data.message);
             navigate("/dashboard");
         } else {
-            alert(data.message); // Error message from backend
+            alert(data.message);
         }
     }
     useEffect(() => {
@@ -131,38 +151,73 @@ export default function SignUnForm({ toggleForm }) {
                 </div>
 
                 <div className="mb-2">
-                    <div className="flex flex-row justify-between mt-2 mb-2">
-                        <div>
-                            <span className="text-xs sm:text-base">Password</span>
+
+                    <div className="flex flex-col">
+
+                        <div className="flex flex-row justify-between mt-2 mb-2">
+                            <div>
+                                <span className="text-xs sm:text-base">Password</span>
+                            </div>
+
                         </div>
-
-                    </div>
-
-                    <div
-                        className="passwordContainer mb-3"
-                        style={{ position: "relative" }}
-                    >
-                        <input
-                            id="password-input"
-                            value={password}
-                            onChange={handlePasswordChange}
-                            type={showPassword ? "text" : "password"}
-                            className="form-input-text form-input-password text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300"
-                            onBlur={(e) => {
-                                const toggleButton = document.getElementById("toggle-password");
-                                if (e.relatedTarget === toggleButton) {
-                                    e.target.focus();
-                                }
-                            }}
-                        />
-                        <button
-                            type="button"
-                            onClick={toggleEye}
-                            className="absolute right-2 bottom-1.5 sm:right-3 sm:bottom-2 text-sm sm:text-xl cursor-pointer"
-                            id="toggle-password"
+                        <div
+                            className="passwordContainer "
+                            style={{ position: "relative" }}
                         >
-                            {showPassword ? <FaRegEyeSlash /> : <FaEye />}
-                        </button>
+                            <input
+                                id="password-input"
+                                value={password}
+                                onChange={handlePasswordChange}
+                                type={showPassword ? "text" : "password"}
+                                className="form-input-text form-input-password text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300"
+                                onBlur={(e) => {
+                                    const toggleButton = document.getElementById("toggle-password");
+                                    if (e.relatedTarget === toggleButton) {
+                                        e.target.focus();
+                                    }
+                                }}
+                            />
+                            <button
+                                type="button"
+                                onClick={toggleEye}
+                                className="absolute right-2 bottom-1.5 sm:right-3 sm:bottom-2 text-sm sm:text-xl cursor-pointer"
+                                id="toggle-password"
+                            >
+                                {showPassword ? <FaRegEyeSlash /> : <FaEye />}
+                            </button>
+                        </div>
+                        <div className="flex flex-row justify-between mt-2 mb-2">
+                            <div>
+                                <span className="text-xs sm:text-base">Confirm Password</span>
+                            </div>
+
+                        </div>
+                        <div
+                            className="passwordContainer mb-3"
+                            style={{ position: "relative" }}
+                        >
+                            <input
+                                id="confirmPassword-input"
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
+                                type={showConfirmPassword ? "text" : "password"}
+                                className="form-input-text form-input-password text-xs sm:text-base w-full p-2 rounded border-1 border-stone-500 focus:border-blue-500 focus:ring-3 focus:ring-blue-300 transition-outline duration-300"
+                                onBlur={(e) => {
+                                    const toggleButton = document.getElementById("toggle-confirmPassword");
+                                    if (e.relatedTarget === toggleButton) {
+                                        e.target.focus();
+                                    }
+                                }}
+                            />
+                            <button
+                                type="button"
+                                onClick={toggleEye2}
+                                className="absolute right-2 bottom-1.5 sm:right-3 sm:bottom-2 text-sm sm:text-xl cursor-pointer"
+                                id="toggle-confirmPassword"
+                            >
+                                {showConfirmPassword ? <FaRegEyeSlash /> : <FaEye />}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
