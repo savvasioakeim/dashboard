@@ -17,7 +17,7 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
     const location = useLocation();
     return (
         <div
-            className={`fixed top-0 left-0 z-50 sm:text-white flex flex-col  min-w-fit text-4xs  rounded-r-md relative   sm:bg-slate-800  ${isOpen ? "text-white md:w-fit md:p-7 w-45 p-4 h-screen items-start bg-slate-800" : "w-fit p-3 h-10  md:h-screen bg-inherit text-slate-800 "
+            className={`fixed top-0 left-0 z-50 sm:text-white flex flex-col   min-w-fit text-4xs   relative   sm:bg-slate-800  ${isOpen ? "text-white md:w-fit md:p-7 w-45 p-4 h-screen items-start bg-slate-800 rounded-r-md " : "md:rounded-none w-fit p-3 h-10  md:h-screen bg-slate-800 text-white rounded-full top-1 md:top-0 "
                 }`}
         >
 
@@ -123,7 +123,7 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
                 </button>
             </div>
 
-            <div className={`absolute top-3 left-0 w-full px-4 flex items-center  sm:text-2xl ${!isOpen ? "justify-center  " : "justify-between"}`}>
+            <div className={`absolute top-3 left-0 w-full px-4 flex items-center  sm:text-2xl ${!isOpen ? "justify-center rounded-full " : "justify-between "}`}>
                 <span className={`${!isOpen && "hidden"}`}>Eshop.com</span>
                 <button onClick={toggleSidebar} className="cursor-pointer ">
                     <LuArrowRightToLine className={`transition-transform ${isOpen ? "rotate-0 " : "rotate-180 "}`} />
