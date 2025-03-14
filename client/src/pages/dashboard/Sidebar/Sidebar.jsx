@@ -8,6 +8,7 @@ import { BsBoxSeam } from "react-icons/bs";
 import { RiFunctionAddFill, RiLogoutBoxRFill } from "react-icons/ri";
 import { LuArrowRightToLine } from "react-icons/lu";
 import { FaUserCircle } from "react-icons/fa";
+import { MdOutlineSettingsApplications } from "react-icons/md";
 
 
 
@@ -28,7 +29,7 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
                             src={`http://localhost:3000${user.avatar}`}
                             alt="User Avatar"
                             className={`rounded-full border bg-white text-black object-cover  ${!isOpen
-                                ? "w-7 h-7 sm:w-11 sm:h-11 hidden"
+                                ? "w-7 h-7 sm:w-11 sm:h-11 hidden sm:block"
                                 : "w-15 h-15 sm:w-30 sm:h-30 "
                                 }`}
                         />
@@ -83,6 +84,11 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
                             <RiFunctionAddFill />
                             <span className={`${!isOpen && "hidden"}`}>New Product</span>
                         </Link>
+                        <Link to="/dashboard/manage-products" className={`flex items-center gap-2 hover:text-purple-400 ${location.pathname === "/dashboard/manage-products" && "text-purple-400 "}`}>
+                            <MdOutlineSettingsApplications />
+
+                            <span className={`${!isOpen && "hidden"}`}>Manage Products</span>
+                        </Link>
                     </div>
                 </div>
 
@@ -113,19 +119,19 @@ export default function Sidebar({ user, logout, isOpen, toggleSidebar }) {
                 </div>
             </nav >
 
-            <div
-                className={`flex gap-2 hover:text-purple-400 cursor-pointer w-full mt-5 sm:text-2xl mt-auto items-center  ${!isOpen && "justify-center sm:flex hidden "
+            <div onClick={logout}
+                className={` gap-2 hover:text-purple-400 cursor-pointer  mt-5 sm:text-2xl mt-auto   ${!isOpen ? "flex justify-center sm:flex hidden " : "flex justiy-center items-center "
                     }`}
             >
                 <RiLogoutBoxRFill onClick={logout} />
-                <button className={`${!isOpen && "hidden"}`} onClick={logout}>
+                <button className={`cursor-pointer ${!isOpen && "hidden"}`} onClick={logout}>
                     Logout
                 </button>
             </div>
 
             <div className={`absolute top-3 left-0 w-full px-4 flex items-center  sm:text-2xl ${!isOpen ? "justify-center rounded-full " : "justify-between "}`}>
                 <span className={`${!isOpen && "hidden"}`}>Eshop.com</span>
-                <button onClick={toggleSidebar} className="cursor-pointer ">
+                <button onClick={toggleSidebar} className="cursor-pointer  ">
                     <LuArrowRightToLine className={`transition-transform ${isOpen ? "rotate-0 " : "rotate-180 "}`} />
                 </button>
             </div>

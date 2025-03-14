@@ -6,7 +6,7 @@ const routes = require('./routes');
 const connectDB = require('./config/db');
 const sessionConfig = require('./config/sessionConfig');
 const userRoutes = require('./routes/userRoutes');
-
+const productAttributesRoutes = require('./routes/productAttributes');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,6 +23,7 @@ app.use(sessionConfig);
 
 app.use('/api', routes);
 app.use('/api/users', userRoutes);
+app.use('/api/product-attributes', productAttributesRoutes);
 
 
 app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));

@@ -213,7 +213,7 @@ export default function ManageUsers() {
                                                     <select
                                                         value={user.role}
                                                         onChange={(e) => handleRoleChange(user._id, e.target.value)}
-                                                        className="border rounded p-1"
+                                                        className="border rounded p-1 cursor-pointer"
                                                     >
                                                         <option value="user">User</option>
                                                         <option value="admin">Admin</option>
@@ -225,7 +225,7 @@ export default function ManageUsers() {
                                                             <>
                                                                 <button
                                                                     onClick={() => handleSave(user._id)}
-                                                                    className="bg-blue-400 p-1 border rounded hover:bg-blue-500"
+                                                                    className="bg-blue-400 p-1 border rounded hover:bg-blue-500 cursor-pointer"
                                                                 >
                                                                     Save
                                                                 </button>
@@ -234,7 +234,7 @@ export default function ManageUsers() {
                                                                         setEditMode(null);
                                                                         setValidationErrors({});
                                                                     }}
-                                                                    className="bg-gray-400 p-1 border rounded hover:bg-gray-500"
+                                                                    className="bg-gray-400 p-1 border rounded hover:bg-gray-500 cursor-pointer"
                                                                 >
                                                                     Cancel
                                                                 </button>
@@ -242,13 +242,13 @@ export default function ManageUsers() {
                                                         ) : (
                                                             <button
                                                                 onClick={() => handleEditMode(user)}
-                                                                className="bg-green-400 p-1 border rounded hover:bg-green-500 flex items-center"
+                                                                className="bg-green-400 p-1 border rounded hover:bg-green-500 flex items-center cursor-pointer"
                                                             >
                                                                 <CiEdit className="text-2xl" />
                                                                 Edit
                                                             </button>
                                                         )}
-                                                        <div className='flex items-center bg-red-400 p-1 border rounded hover:bg-red-500'>
+                                                        <div className='flex items-center bg-red-400 p-1 border rounded hover:bg-red-500 cursor-pointer'>
                                                             <FaRegTrashCan className='text-2xl' />
                                                             <button onClick={() => handleDelete(user._id)} className='rounded' type='button'>delete</button>
                                                         </div>

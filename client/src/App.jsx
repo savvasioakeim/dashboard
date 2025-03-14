@@ -11,7 +11,7 @@ import ManageUsers from './pages/dashboard/Pages/ManageUsers'
 import CreateUser from './pages/dashboard/Pages/CreateUser'
 import AccountSettings from './pages/dashboard/Pages/AccountSettings'
 import DashboardLayout from './pages/dashboard/DashboardLayout';
-
+import ManageProducts from './pages/dashboard/Pages/ManageProducts';
 
 
 function App() {
@@ -36,6 +36,7 @@ function App() {
             <Route path="/dashboard/orders" element={<Orders />} />
             <Route path="/dashboard/products" element={<Products />} />
             <Route path="/dashboard/products/new" element={<NewProduct />} />
+            <Route path="/dashboard/manage-products" element={<ManageProducts />} />
             <Route path="/dashboard/users" element={<ManageUsers />} />
             <Route path="/dashboard/users/create" element={<CreateUser />} />
             <Route path="/dashboard/account-settings" element={<AccountSettings />} />
